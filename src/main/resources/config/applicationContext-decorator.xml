@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  Naonedbus-server
+  %%
+  Copyright (C) 2010 - 2013 Naonedbus
+  %%
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as
+  published by the Free Software Foundation, either version 3 of the 
+  License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public 
+  License along with this program.  If not, see
+  <http://www.gnu.org/licenses/gpl-3.0.html>.
+  #L%
+  -->
+
+<beans 
+    xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    
+    <util:list id="commentaireDecorators" list-class="java.util.ArrayList" value-type="net.naonedbus.service.commentaire.decorator.CommentaireDecorator">
+    	<ref bean="commentaireTopoSeparatorDecorator" />
+    	<ref bean="commentaireTopoSensDecorator" />
+    	<ref bean="commentaireTopoArretDecorator" />
+    	<ref bean="commentaireTopoLigneDecorator" />
+    	<ref bean="commentaireNaonedbusDecorator" />
+    	<ref bean="commentaireSizeDecorator" />
+    </util:list>
+    <bean id="commentaireTopoSeparatorDecorator" class="net.naonedbus.service.commentaire.decorator.impl.CommentaireTopoSeparatorDecorator" />
+    <bean id="commentaireTopoLigneDecorator" class="net.naonedbus.service.commentaire.decorator.impl.CommentaireTopoLigneDecorator" />
+    <bean id="commentaireTopoSensDecorator" class="net.naonedbus.service.commentaire.decorator.impl.CommentaireTopoSensDecorator" />
+    <bean id="commentaireTopoArretDecorator" class="net.naonedbus.service.commentaire.decorator.impl.CommentaireTopoArretDecorator" />
+    <bean id="commentaireNaonedbusDecorator" class="net.naonedbus.service.commentaire.decorator.impl.CommentaireNaonedbusDecorator" />
+    <bean id="commentaireSizeDecorator" class="net.naonedbus.service.commentaire.decorator.impl.CommentaireSizeDecorator" />
+    
+</beans>

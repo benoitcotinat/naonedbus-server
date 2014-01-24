@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  #%L
+  Naonedbus-server
+  %%
+  Copyright (C) 2010 - 2013 Naonedbus
+  %%
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as
+  published by the Free Software Foundation, either version 3 of the 
+  License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public 
+  License along with this program.  If not, see
+  <http://www.gnu.org/licenses/gpl-3.0.html>.
+  #L%
+  -->
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<!-- CONFIGURATION PAR DEFAUT DE LOG4J -->
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/' debug="false">
+	
+	<!-- Sortie console -->
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{dd/MM/yyyy HH:mm:ss,SSS} %-5p (%c) (%10F:%L) %m%n %x]%n" />
+		</layout>
+	</appender>
+	
+	<!-- Sortie console test -->
+	<appender name="CONSOLE_TEST" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%m %n"/>
+		</layout>
+	</appender>	
+	
+	<!-- Sortie fichier -->
+	<appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${log4j_file}" />
+		<param name="datePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{dd/MM/yyyy HH:mm:ss,SSS} %-5p (%c) (%10F:%L) %m%n %x]%n" />
+		</layout>
+	</appender>
+
+	<!-- Permet d'afficher les valeurs des paramètres des requêtes -->
+	<logger name="org.hibernate.type">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.hibernate.pretty.Printer">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.hibernate.engine.TwoPhaseLoad">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.hibernate.loader.Loader">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.dbunit.database">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.hibernate.persister.entity">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.springframework.orm.hibernate3">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.apache.commons.digester.Digester">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.apache.commons.beanutils">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.hibernate.cfg">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.hibernate.loader.entity">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.hibernate.util">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.hibernate.connection">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.hibernate.impl">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.springframework.beans.factory">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.springframework.context.support">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.apache.catalina.startup.TldConfig">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.acegisecurity.intercept">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.apache.jasper.compiler">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.apache.catalina.session.ManagerBase">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="net.sf.ehcache">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.hibernate.tool.hbm2ddl.SchemaExport">
+		<level value="INFO" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.webharvest.definition.XmlParser">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.apache.commons.httpclient">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.apache.commons.httpheader">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="httpclient.wire.content">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="httpclient.wire.header">
+		<level value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+
+	<logger name="NAONEDBUS" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</logger>
+
+	<logger name="TEST" additivity="false">
+		<level value="${log4j_testlevel}"/>
+		<appender-ref ref="CONSOLE_TEST"/>
+	</logger>	
+
+	<!-- applique les sorties au root -->
+	<root>
+		<level value="${log4j_rootlevel}" />
+		<appender-ref ref="${log4j_appender-ref}" />
+	</root>
+
+</log4j:configuration>

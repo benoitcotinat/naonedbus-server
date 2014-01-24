@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  Naonedbus-server
+  %%
+  Copyright (C) 2010 - 2013 Naonedbus
+  %%
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as
+  published by the Free Software Foundation, either version 3 of the 
+  License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public 
+  License along with this program.  If not, see
+  <http://www.gnu.org/licenses/gpl-3.0.html>.
+  #L%
+  -->
+
+<beans 
+    xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    
+    <!-- ################################################## -->
+    <!-- UTILS -->
+    <!-- ################################################## -->
+    <bean id="tanInfosDelimiter" class="java.lang.String">
+        <constructor-arg index="0" value="|" />
+    </bean>
+    <bean id="twitterCommentaireTransformer" class="net.naonedbus.service.commentaire.transformer.TwitterCommentaireTransformer" />
+    <bean id="twitterStatusReplyPredicate" class="net.naonedbus.service.commentaire.predicate.TwitterStatusReplyPredicate" />
+    <bean id="twitterTanInfosPredicate" class="net.naonedbus.service.commentaire.predicate.TwitterTanInfosPredicate" />
+    <util:list id="twitterPredicates" list-class="java.util.ArrayList" value-type="org.apache.commons.collections.CollectionUtils">
+        <ref bean="twitterStatusReplyPredicate"/>
+        <ref bean="twitterTanInfosPredicate"/>
+    </util:list>
+    
+    <!-- ################################################## -->
+    <!-- RETRIEVERS -->
+    <!-- ################################################## -->
+    <util:list id="commentaireRetrievers" list-class="java.util.ArrayList" value-type="net.naonedbus.service.commentaire.retriever.CommentaireRetriever">
+    	<ref bean="commentaireBDDRetriever"/>
+    	<ref bean="commentaireTwitterRetriever"/>
+    </util:list>
+    <bean id="commentaireBDDRetriever" class="net.naonedbus.service.commentaire.retriever.impl.CommentaireBDDRetriever" />
+    <bean id="commentaireTwitterRetriever" class="net.naonedbus.service.commentaire.retriever.impl.CommentaireTwitterRetriever" />
+    <util:list id="twitterAccountsToRetrieve" list-class="java.util.ArrayList" value-type="java.lang.String">
+<!--         <value type="java.lang.String">tan_trafic</value> -->
+        <value type="java.lang.String">tan_actus</value>
+        <value type="java.lang.String">taninfos</value>
+    </util:list>
+    
+    <!-- ################################################## -->
+    <!-- PUBLISHERS -->
+    <!-- ################################################## -->
+    <util:map id="commentairePublishers" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.util.List">
+    	<description>Dictionnaire de strategy de publication des commentaires en fonction de la source.</description>
+    	<entry key="NAONEDBUS" value-ref="commentaireNaonedbusPublishers" />
+    	<entry key="NAONEDBUS_IOS" value-ref="commentaireNaonedbusPublishers" />
+    	<entry key="NAONEDBUS_SERVICE" value-ref="commentaireNaonedbusServicePublishers" />
+    </util:map>
+    
+    <util:list id="commentaireNaonedbusPublishers" list-class="java.util.ArrayList" value-type="net.naonedbus.service.commentaire.publisher.CommentairePublisher">
+    	<ref bean="commentaireBDDPublisher"/>
+    	<ref bean="commentaireTwitterPublisher"/>
+    </util:list>
+    <util:list id="commentaireNaonedbusServicePublishers" list-class="java.util.ArrayList" value-type="net.naonedbus.service.commentaire.publisher.CommentairePublisher">
+    	<ref bean="commentaireBDDPublisher"/>
+    </util:list>
+    
+    <bean id="commentaireBDDPublisher" class="net.naonedbus.service.commentaire.publisher.impl.CommentaireBDDPublisher" />
+    <bean id="commentaireTwitterPublisher" class="net.naonedbus.service.commentaire.publisher.impl.CommentaireTwitterPublisher">
+        <property name="twitterActivated" value="${twitter.activated}" />
+    </bean>
+    
+    <!-- ################################################## -->
+    <!-- DESTROYERS -->
+    <!-- ################################################## -->
+    <util:map id="commentaireDestroyers" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.util.List">
+    	<description>Dictionnaire de strategy de suppression des commentaires en fonction de la source.</description>
+    	<entry key="NAONEDBUS" value-ref="commentaireNaonedbusDestroyers" />
+    	<entry key="NAONEDBUS_IOS" value-ref="commentaireNaonedbusDestroyers" />
+    	<entry key="NAONEDBUS_SERVICE" value-ref="commentaireNaonedbusServiceDestroyers" />
+    </util:map>
+    
+    <util:list id="commentaireNaonedbusDestroyers" list-class="java.util.ArrayList" value-type="net.naonedbus.service.commentaire.destroyer.CommentaireDestroyer">
+    	<ref bean="commentaireBDDDestroyer"/>
+    	<ref bean="commentaireTwitterDestroyer"/>
+    </util:list>
+    <util:list id="commentaireNaonedbusServiceDestroyers" list-class="java.util.ArrayList" value-type="net.naonedbus.service.commentaire.destroyer.CommentaireDestroyer">
+    	<ref bean="commentaireBDDDestroyer"/>
+    </util:list>
+    
+    <bean id="commentaireBDDDestroyer" class="net.naonedbus.service.commentaire.destroyer.impl.CommentaireBDDDestroyer" />
+    <bean id="commentaireTwitterDestroyer" class="net.naonedbus.service.commentaire.destroyer.impl.CommentaireTwitterDestroyer" />
+    
+</beans>

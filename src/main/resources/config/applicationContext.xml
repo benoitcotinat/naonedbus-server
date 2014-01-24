@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  Naonedbus-server
+  %%
+  Copyright (C) 2010 - 2013 Naonedbus
+  %%
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as
+  published by the Free Software Foundation, either version 3 of the 
+  License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public 
+  License along with this program.  If not, see
+  <http://www.gnu.org/licenses/gpl-3.0.html>.
+  #L%
+  -->
+
+
+<beans 
+	xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+    	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    
+    
+			
+	<tx:annotation-driven/>
+    <context:component-scan base-package="net.naonedbus" />
+    <context:property-placeholder location="classpath:/config/hibernate.properties,classpath:/config/naonedbus.properties,classpath:/config/keys.properties"/>
+    
+    <!-- Fichier de configuration de ressources du projet -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>config/naonedbus</value>
+			</list>
+		</property>
+		<property name="alwaysUseMessageFormat" value="true" />
+		<property name="useCodeAsDefaultMessage" value="true"/>
+	</bean>
+    
+    <import resource="classpath:/config/applicationContext-builder.xml" />
+    <import resource="classpath:/config/applicationContext-commentaire.xml" />
+    <import resource="classpath:/config/applicationContext-criteriaDictionnary.xml" />
+    <import resource="classpath:/config/applicationContext-criteriaMaker.xml" />
+    <import resource="classpath:/config/cxf.xml" />
+    <import resource="classpath:/config/applicationContext-dao.xml" />
+    <import resource="classpath:/config/applicationContext-decorator.xml" />
+    <import resource="classpath:/config/applicationContext-factory.xml" />
+    <import resource="classpath:/config/applicationContext-helper.xml" />
+    <import resource="classpath:/config/applicationContext-jdbc.xml" />
+    <import resource="classpath:/config/applicationContext-jpa.xml" />   
+    <import resource="classpath:/config/applicationContext-processor.xml" />   
+    <import resource="classpath:/config/applicationContext-retriever.xml" />   
+    <import resource="classpath:/config/applicationContext-schedule.xml" />   
+    <import resource="classpath:/config/applicationContext-scrapper.xml" />   
+    <import resource="classpath:/config/applicationContext-security.xml" />   
+    <import resource="classpath:/config/applicationContext-service.xml" /> 
+    <import resource="classpath:/config/applicationContext-twitter.xml" />   
+    
+</beans>    

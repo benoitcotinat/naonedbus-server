@@ -1,0 +1,562 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.naonedbus</groupId>
+    <artifactId>naonedbus-server</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>Naonedbus</name>
+	<url>http://code.google.com/p/naonedbus/</url>
+	<inceptionYear>2010</inceptionYear>
+	<licenses>
+	   <license>
+	       <name>GNU General Public License v3</name>
+	       <url>http://www.gnu.org/licenses/gpl-3.0.en.html</url>
+	   </license>
+	</licenses>
+	<organization>
+	   <name>Naonedbus</name>
+	</organization>
+	<developers>
+		<developer>
+			<id>1</id>
+			<name>Romain GUEFVENEU</name>
+			<email>romain.guefveneu@gmail.com</email>
+			<url>http://romain-guefveneu.net/</url>
+		</developer>
+		<developer>
+			<id>2</id>
+			<name>Benoît COTINAT</name>
+			<email>benoit.cotinat@gmail.com</email>
+		</developer>
+	</developers>
+
+    <properties>
+    	<env>dev</env>
+        <final-name>naonedbus-server</final-name>
+    
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <java-version>1.6</java-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+		<activation-version>1.1.1</activation-version>
+		<bsh-version>1.3.0</bsh-version>
+		<c3p0-version>0.9.1.2</c3p0-version>
+		<commons-beanutils-version>1.8.3</commons-beanutils-version>
+		<commons-cli-version>1.2</commons-cli-version>
+		<commons-codec-version>1.5</commons-codec-version><!-- 1.6 -->
+		<commons-collections-version>3.2.1</commons-collections-version>
+		<commons-email-version>1.2</commons-email-version>
+		<commons-httpclient-version>3.1</commons-httpclient-version>
+		<commons-lang-version>2.6</commons-lang-version>
+		<commons-logging-version>1.1.1</commons-logging-version>
+		<commons-net-version>3.0.1</commons-net-version><!-- 3.1 -->
+		<cxf-version>2.4.1</cxf-version><!-- 2.5.2 -->
+		<groovy-version>1.0-jsr-04</groovy-version>
+		<!--
+		<hibernate-version>3.6.4.Final</hibernate-version>
+		<hibernate-validator-version>4.0.2.GA</hibernate-validator-version>
+		-->
+		<hibernate-version>4.1.1.Final</hibernate-version>
+		<hibernate-validator-version>4.2.0.Final</hibernate-validator-version>
+		<htmlcleaner-version>2.2</htmlcleaner-version>
+		<jaxb-xjc-version>2.1.13</jaxb-xjc-version>
+		<javassist-version>3.12.1.GA</javassist-version>
+		<javax-mail-version>1.4.1</javax-mail-version>
+		<jpa-version>1.0.0.Final</jpa-version><!-- 1.0.1.Final -->
+		<mysql-connector-java-version>5.1.16</mysql-connector-java-version>
+		<rhino-js-version>1.7R2</rhino-js-version>
+		<saxon-version>9.1.0.8</saxon-version>
+		<servlet-api-version>2.5</servlet-api-version>
+		<slf4j-version>1.6.1</slf4j-version><!-- 1.6.4 -->
+		<spring-version>3.1.0.RELEASE</spring-version><!-- 3.1.1.RELEASE -->
+<!-- 		<twitter4j-version>2.2.5</twitter4j-version> -->
+		<twitter4j-version>3.0.5</twitter4j-version>
+		<validation-api-version>1.0.0.GA</validation-api-version>
+		<webharvest-version>2.1.0-SNAPSHOT</webharvest-version>
+		<xmlbeans-version>2.4.0</xmlbeans-version><!-- 2.5.0 -->
+		
+		<!-- TESTS -->
+		<junit-version>4.8.2</junit-version><!-- 4.10 -->
+		<mockito-version>1.9.0</mockito-version>
+		
+		<!-- PLUGINS -->
+		<maven-compiler-plugin>2.3.2</maven-compiler-plugin>
+		<maven-dependency-plugin-version>2.2</maven-dependency-plugin-version><!-- 2.4 -->
+		<maven-eclipse-plugin-version>2.6</maven-eclipse-plugin-version><!-- 2.9 -->
+		<maven-war-plugin-version>2.1.1</maven-war-plugin-version><!-- 2.2 -->
+    </properties>
+
+	<repositories>
+		<repository>  
+			<id>artifactory2</id>  
+			<url>http://atlantique.netapsys.fr/artifactory2/repo</url>  
+		</repository> 
+		<repository>  
+			<id>wso2</id>  
+			<url>http://dist.wso2.org/maven2/</url>  
+		</repository>  
+		<repository>  
+			<id>maven-repository-1</id>  
+			<url>http://repo1.maven.org/maven2/</url>  
+		</repository>  
+		<repository>
+			<id>ibiblio.org</id>
+			<name>ibiblio Mirror of http://repo1.maven.org/maven2/</name>
+			<url>http://mirrors.ibiblio.org/pub/mirrors/maven2</url>
+		</repository>
+<!-- 		<repository> -->
+<!-- 			<id>repository.jboss.org</id> -->
+<!-- 			<name>JBoss Repository</name> -->
+<!-- 			<url>http://repository.jboss.org/maven2/</url> -->
+<!-- 		</repository> -->
+		<repository>
+			<id>repository.apache.org-releases</id>
+			<name>Apache repo (releases)</name>
+			<url>https://repository.apache.org/content/repositories/releases/</url>
+		</repository>
+<!-- 		<repository> -->
+<!-- 			<id>twitter4j.org</id> -->
+<!-- 			<name>twitter4j.org Repository</name> -->
+<!-- 			<url>http://twitter4j.org/maven2</url> -->
+<!-- 		</repository> -->
+	</repositories>  
+
+    <dependencies>
+    	
+    	<dependency>
+    		<groupId>net.naonedbus</groupId>
+    		<artifactId>naonedbus-common</artifactId>
+    		<version>1.0</version>
+    	</dependency>
+    
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>${c3p0-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>${commons-beanutils-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>${commons-collections-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${commons-lang-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-core</artifactId>
+			<version>${cxf-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+			<version>${cxf-version}</version>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.cxf</groupId> -->
+<!-- 			<artifactId>cxf-rt-frontend-jaxws</artifactId> -->
+<!-- 			<version>${cxf-version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.cxf</groupId> -->
+<!-- 			<artifactId>cxf-rt-frontend-simple</artifactId> -->
+<!-- 			<version>${cxf-version}</version> -->
+<!-- 			<scope>${dependency-deploiement-scope}</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.cxf</groupId> -->
+<!-- 			<artifactId>cxf-rt-transports-http</artifactId> -->
+<!-- 			<version>${cxf-version}</version> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>${javassist-version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>${mysql-connector-java-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		    <version>${servlet-api-version}</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.twitter4j</groupId>
+			<artifactId>twitter4j-core</artifactId>
+			<version>${twitter4j-version}</version>
+		</dependency>
+		<!--
+		<dependency>
+			<groupId>org.twitter4j</groupId>
+			<artifactId>twitter4j-stream</artifactId>
+			<version>${twitter4j-version}</version>
+		</dependency>
+		-->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${validation-api-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlbeans</groupId>
+			<artifactId>xmlbeans</artifactId>
+			<version>${xmlbeans-version}</version>
+		</dependency>
+		
+		<!-- WEB HARVEST -->
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>${activation-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.beanshell</groupId>
+			<artifactId>bsh</artifactId>
+			<version>${bsh-version}</version>
+    	</dependency>
+		<dependency>
+			<groupId>commons-cli</groupId>
+			<artifactId>commons-cli</artifactId>
+			<version>${commons-cli-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commons-codec-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-email</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>${commons-email-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>${commons-httpclient-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>${commons-logging-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>${commons-net-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>${groovy-version}</version>
+		</dependency>
+		<dependency>  
+			<groupId>net.sourceforge.htmlcleaner</groupId>  
+			<artifactId>htmlcleaner</artifactId>  
+			<version>${htmlcleaner-version}</version>  
+		</dependency>
+		<dependency>
+			<groupId>rhino</groupId>
+			<artifactId>js</artifactId>
+			<version>${rhino-js-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>${javax-mail-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.saxon</groupId>
+			<artifactId>saxon</artifactId>
+			<version>${saxon-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.saxon</groupId>
+			<artifactId>saxon-dom</artifactId>
+			<version>${saxon-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.webharvest</groupId>
+			<artifactId>webharvest_2</artifactId>
+			<version>${webharvest-version}</version>
+		</dependency>
+    
+    	<!-- HIBERNATE -->
+	    <dependency>
+	        <groupId>org.hibernate</groupId>
+	        <artifactId>hibernate-c3p0</artifactId>
+	        <version>${hibernate-version}</version>
+	    </dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate-version}</version>
+		</dependency>
+    	<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>${jpa-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator-version}</version>
+		</dependency>	
+		
+		<!-- SPRING -->
+    	<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-core</artifactId>
+		    <version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+    	<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-web</artifactId>
+		    <version>${spring-version}</version>
+		</dependency>
+    
+    	<!-- TESTS -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-core</artifactId>
+		    <version>${mockito-version}</version>
+		</dependency>
+    </dependencies>
+
+    <build>
+    	<finalName>${final-name}</finalName>
+    	
+    	
+		<filters>
+			<filter>src/main/filters/filter-${env}.properties</filter>
+			<filter>src/main/filters/local-${env}.properties</filter>
+		</filters>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>log4j.xml</include>
+					<include>config/hibernate.properties</include>
+					<include>config/naonedbus.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>log4j.xml</include>
+					<include>config/hibernate.properties</include>
+					<include>config/naonedbus.properties</include>
+				</includes>
+			</testResource>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+			</testResource>
+		</testResources>
+    	
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin}</version>
+                <configuration>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
+					<encoding>${projet-encoding}</encoding>
+					<verbose>false</verbose>
+					<debug>true</debug>
+					<optimize>false</optimize>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+                    <compilerArguments>
+                        <endorseddirs>${endorsed.dir}</endorseddirs>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>${maven-dependency-plugin-version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>${maven-eclipse-plugin-version}</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+					<wtpversion>2.0</wtpversion>
+					<wtpContextName>${project.artifactId}</wtpContextName>
+					<projectnatures>
+						<projectnature>org.eclipse.jdt.core.javanature</projectnature>
+						<projectnature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</projectnature>
+						<projectnature>org.eclipse.wst.common.project.facet.core.nature</projectnature>
+						<projectnature>org.eclipse.wst.common.modulecore.ModuleCoreNature</projectnature>
+						<projectnature>org.eclipse.jem.workbench.JavaEMFNature</projectnature>
+					</projectnatures>
+					<additionalProjectFacets>
+               			<jst.jsf>2.0</jst.jsf>
+            		</additionalProjectFacets>
+            		<additionalProjectnatures>
+               			<projectnature>org.jboss.tools.jsf.jsfnature</projectnature>
+            		</additionalProjectnatures>						
+				</configuration>
+			</plugin>
+			<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven-war-plugin-version}</version>
+				<configuration>
+		    		<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+		    	</configuration>
+		    </plugin>
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-java2ws-plugin</artifactId>
+				<version>${cxf-version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.cxf</groupId>
+						<artifactId>cxf-rt-frontend-jaxws</artifactId>
+						<version>${cxf-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.cxf</groupId>
+						<artifactId>cxf-rt-frontend-simple</artifactId>
+						<version>${cxf-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.sun.xml.bind</groupId>
+						<artifactId>jaxb-xjc</artifactId>
+						<version>${jaxb-xjc-version}</version>
+					</dependency>
+				</dependencies>
+			
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<id>process-classes</id> -->
+<!-- 						<phase>process-classes</phase> -->
+<!-- 						<configuration> -->
+<!-- 							<className>net.naonedbus.ws.FavorisWS</className> -->
+<!-- 							<genWsdl>true</genWsdl> -->
+<!-- 							<verbose>true</verbose> -->
+<!-- 						</configuration> -->
+<!-- 						<goals> -->
+<!-- 							<goal>java2ws</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>1.4</version>
+				<configuration>
+				    <licenseName>gpl_v3</licenseName>
+				</configuration>
+			</plugin>
+		</plugins>
+    </build>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+			<properties>
+				<env>dev</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>integ</id>
+			<activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+			<properties>
+				<env>integ</env>
+				<final-name>naonedbus-test</final-name>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+			<properties>
+				<env>prod</env>
+			</properties>
+		</profile>
+	</profiles>
+</project>
