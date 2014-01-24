@@ -1,0 +1,6 @@
+/.classpath
+/.project
+/.settings
+/src/main/filters/local-*.properties
+/target
+/target/*
