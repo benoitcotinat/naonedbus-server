@@ -86,7 +86,7 @@ public class NaonedbusTwitterFactory
                 .setOAuthConsumerSecret(consumerSecret)
                 .setOAuthAccessToken(accessToken)
                 .setOAuthAccessTokenSecret(accessTokenSecret)
-                .setIncludeRTsEnabled(true);
+                .setIncludeMyRetweetEnabled(true);
 
         final TwitterFactory tf = new TwitterFactory(cb.build());
         final Twitter twitter = tf.getInstance();

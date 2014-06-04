@@ -59,6 +59,8 @@ import net.naonedbus.service.commentaire.transformer.TwitterCommentaireTransform
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.PredicateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import twitter4j.Paging;
 import twitter4j.Status;
@@ -73,6 +75,11 @@ import twitter4j.TwitterException;
 public class CommentaireTwitterRetriever
     implements CommentaireRetriever
 {
+    /**
+     * Logger.
+     */
+    private final Logger log = LoggerFactory.getLogger("NAONEDBUS");
+
     /** Liste des comptes twitter donc il faut récupérer les tweets. */
     @Resource(name = "twitterAccountsToRetrieve")
     private List<String> accounts;
@@ -94,11 +101,9 @@ public class CommentaireTwitterRetriever
      * {@inheritDoc}
      * @throws NaonedbusException En cas d'erreur lors de la récupération des tweets.
      */
-    @SuppressWarnings(
-    {"unchecked", "rawtypes" })
+    @SuppressWarnings({"rawtypes", "unchecked" })
     @Override
     public List<Commentaire> retrieve(final CommentaireSearchCriteria commentaireCriteria)
-        throws NaonedbusException
     {
         final Paging paging = new Paging(1,
                                          commentaireCriteria.getMaxResults());
@@ -113,9 +118,9 @@ public class CommentaireTwitterRetriever
             }
             catch (final TwitterException e)
             {
-                throw new NaonedbusException("Erreur lors de la récupération des tweets de "
-                                                     + account,
-                                             e);
+                this.log.error("Erreur lors de la récupération des tweets de "
+                                       + account,
+                               e);
             }
         }
 

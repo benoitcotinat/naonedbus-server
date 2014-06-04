@@ -38,7 +38,7 @@
         <final-name>naonedbus-server</final-name>
     
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
-        <java-version>1.6</java-version>
+        <java-version>1.7</java-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
 		<activation-version>1.1.1</activation-version>
@@ -73,7 +73,7 @@
 		<slf4j-version>1.6.1</slf4j-version><!-- 1.6.4 -->
 		<spring-version>3.1.0.RELEASE</spring-version><!-- 3.1.1.RELEASE -->
 <!-- 		<twitter4j-version>2.2.5</twitter4j-version> -->
-		<twitter4j-version>3.0.5</twitter4j-version>
+		<twitter4j-version>4.0.1</twitter4j-version>
 		<validation-api-version>1.0.0.GA</validation-api-version>
 		<webharvest-version>2.1.0-SNAPSHOT</webharvest-version>
 		<xmlbeans-version>2.4.0</xmlbeans-version><!-- 2.5.0 -->
