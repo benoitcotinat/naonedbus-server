@@ -90,7 +90,7 @@ public class CommentaireWS
      * @param codeSens Code du sens concerné.
      * @param codeArret Code de l'arrêt concerné.
      * @param message Message à sauvegarder.
-     * @param cryptedHash Hash chiffré des paramètres.
+     * @param signedMessage Hash chiffré des paramètres.
      * @param idClient Clé permettant de vérifier l'intégrité des données transmises.
      * @throws NaonedbusException En cas de chiffrement non valide.
      */
@@ -99,7 +99,7 @@ public class CommentaireWS
                      final @QueryParam("codeSens") String codeSens,
                      final @QueryParam("codeArret") String codeArret,
                      final @QueryParam("message") String message,
-                     final @QueryParam("hash") String cryptedHash,
+                     final @QueryParam("hash") String signedMessage,
                      final @QueryParam("idClient") String idClient)
     {
         if (this.log.isDebugEnabled())
@@ -116,7 +116,7 @@ public class CommentaireWS
             sb.append(" - Message = >");
             sb.append(message);
             sb.append("< - Hash chiffré = >");
-            sb.append(cryptedHash);
+            sb.append(signedMessage);
             sb.append("<");
             this.log.debug(sb.toString());
         }
@@ -127,7 +127,7 @@ public class CommentaireWS
                                                            codeSens,
                                                            codeArret,
                                                            message,
-                                                           cryptedHash,
+                                                           signedMessage,
                                                            idClient);
         }
         catch (final NaonedbusException e)

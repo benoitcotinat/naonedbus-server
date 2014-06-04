@@ -168,7 +168,7 @@ public class CommentaireServiceImpl
         }
         else
         {
-            this.log.error("Soumission d'un commentaire avec un hash non valide pour le client "
+            this.log.error("Soumission d'un commentaire avec une signature non valide pour le client "
                            + idClient);
             throw new NaonedbusException();
         }
@@ -222,12 +222,12 @@ public class CommentaireServiceImpl
      */
     @Override
     public void delete(final int id,
-                       final String cryptedHash,
+                       final String signedMessage,
                        final String idClient)
         throws NaonedbusException
     {
         if (this.securityHelper.validate(NaonedbusClient.NAONEDBUS_SERVICE.name(),
-                                         cryptedHash,
+                                         signedMessage,
                                          String.valueOf(id)))
         {
             final Commentaire commentaire = this.get(id);
