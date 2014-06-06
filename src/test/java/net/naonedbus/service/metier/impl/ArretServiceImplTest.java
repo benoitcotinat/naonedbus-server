@@ -51,7 +51,6 @@ import java.util.List;
 import net.naonedbus.dao.common.GenericDao;
 import net.naonedbus.model.Arret;
 import net.naonedbus.model.criteria.impl.ArretSearchCriteria;
-import net.naonedbus.model.criteria.impl.ArretsWithHorairesSearchCriteria;
 import net.naonedbus.service.metier.ArretService;
 
 import org.junit.After;
@@ -176,13 +175,4 @@ public class ArretServiceImplTest
         Assert.assertNull(ret);
     }
 
-    /**
-     * Test getArretsWithHoraires.
-     */
-    @Test
-    public void getArretsWithHoraires()
-    {
-        this.service.getArretsWithHoraires();
-        Mockito.verify(this.daoMock).getAll(Matchers.any(ArretsWithHorairesSearchCriteria.class));
-    }
 }

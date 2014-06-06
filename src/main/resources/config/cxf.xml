@@ -36,7 +36,6 @@
 	<jaxrs:server id="customerService" address="/">
 		<jaxrs:serviceBeans>
 	    	<bean class="net.naonedbus.ws.TestWebServices" />
-	    	<bean class="net.naonedbus.ws.HoraireWS" />
 	    	<bean class="net.naonedbus.ws.CommentaireWS" />
 	    	<bean class="net.naonedbus.ws.FavorisWS" />
 	    </jaxrs:serviceBeans>

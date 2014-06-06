@@ -64,13 +64,6 @@
 	</bean>
     
     <!-- ============================= -->
-	<!-- HORAIRE 	                   -->
-	<!-- ============================= -->
-	<bean id="horaireDao" parent="commonDao">
-		<constructor-arg index="0" value="net.naonedbus.model.Horaire"/>
-	</bean>
-    
-    <!-- ============================= -->
 	<!-- COMMENTAIRE                   -->
 	<!-- ============================= -->
 	<bean id="commentaireDao" parent="commonDao">

@@ -49,7 +49,6 @@
 		<property name="useCodeAsDefaultMessage" value="true"/>
 	</bean>
     
-    <import resource="classpath:/config/applicationContext-builder.xml" />
     <import resource="classpath:/config/applicationContext-commentaire.xml" />
     <import resource="classpath:/config/applicationContext-criteriaDictionnary.xml" />
     <import resource="classpath:/config/applicationContext-criteriaMaker.xml" />
@@ -60,10 +59,6 @@
     <import resource="classpath:/config/applicationContext-helper.xml" />
     <import resource="classpath:/config/applicationContext-jdbc.xml" />
     <import resource="classpath:/config/applicationContext-jpa.xml" />   
-    <import resource="classpath:/config/applicationContext-processor.xml" />   
-    <import resource="classpath:/config/applicationContext-retriever.xml" />   
-    <import resource="classpath:/config/applicationContext-schedule.xml" />   
-    <import resource="classpath:/config/applicationContext-scrapper.xml" />   
     <import resource="classpath:/config/applicationContext-security.xml" />   
     <import resource="classpath:/config/applicationContext-service.xml" /> 
     <import resource="classpath:/config/applicationContext-twitter.xml" />   

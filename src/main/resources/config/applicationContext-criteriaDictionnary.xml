@@ -40,16 +40,12 @@
 		class="net.naonedbus.dao.criteria.dictionnary.impl.CriteriaDictionaryImpl">
 		<property name="makers">
 			<map>
-				<entry key="net.naonedbus.model.criteria.impl.HoraireSearchCriteria"
-					   value-ref="horaireSearchCriteriaMaker" /> 
 				<entry key="net.naonedbus.model.criteria.impl.FavorisSearchCriteria"
 					   value-ref="favorisSearchCriteriaMaker" /> 
 				<entry key="net.naonedbus.model.criteria.impl.CommentaireSearchCriteria"
 					   value-ref="commentaireSearchCriteriaMaker" /> 
 				<entry key="net.naonedbus.model.criteria.impl.SensSearchCriteria"
 					   value-ref="sensSearchCriteriaMaker" /> 
-				<entry key="net.naonedbus.model.criteria.impl.ArretsWithHorairesSearchCriteria"
-					   value-ref="arretsWithHorairesSearchCriteriaMaker" /> 
 				<entry key="net.naonedbus.model.criteria.impl.ArretSearchCriteria"
 					   value-ref="arretSearchCriteriaMaker" /> 
 				<entry key="net.naonedbus.model.criteria.impl.CommonCodeSearchCriteria"
@@ -66,11 +62,6 @@
 	<bean id="favorisSearchCriteria" class="net.naonedbus.model.criteria.impl.FavorisSearchCriteria" scope="prototype">
 		<property name="activeOrder" value="id" />
 		<property name="ascending" value="false" />
-	</bean>
-	
-	<bean id="horaireSearchCriteria" class="net.naonedbus.model.criteria.impl.HoraireSearchCriteria" scope="prototype">
-		<property name="activeOrder" value="timestamp" />
-		<property name="ascending" value="true" />
 	</bean>
 	
 </beans>

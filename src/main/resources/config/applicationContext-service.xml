@@ -61,14 +61,6 @@
 	<bean id="arretService" class="net.naonedbus.service.metier.impl.ArretServiceImpl" parent="commonService">
 		<constructor-arg index="0" ref="arretDao" />
 	</bean>
-
-	<!-- ============================= -->
-	<!-- HORAIRE                       -->
-	<!-- ============================= -->		
-	<bean id="horaireService" class="net.naonedbus.service.metier.impl.HoraireServiceImpl" parent="commonService">
-		<constructor-arg index="0" ref="horaireDao" />
-		<property name="horaireRetriever" ref="horaireTanRetriever" />
-	</bean>
 	
 	<!-- ============================= -->
 	<!-- COMMENTAIRE                   -->

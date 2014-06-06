@@ -47,7 +47,6 @@
 	<!-- ARRET   	                   -->
 	<!-- ============================= -->		
 	<bean id="arretSearchCriteriaMaker" class="net.naonedbus.dao.criteria.dictionnary.maker.metier.ArretSearchCriteriaMaker" />
-	<bean id="arretsWithHorairesSearchCriteriaMaker" class="net.naonedbus.dao.criteria.dictionnary.maker.metier.ArretsWithHorairesSearchCriteriaMaker" />
 
 	<!-- ============================= -->
 	<!-- COMMENTAIRE                   -->
@@ -58,10 +57,5 @@
 	<!-- FAVORIS                       -->
 	<!-- ============================= -->		
 	<bean id="favorisSearchCriteriaMaker" class="net.naonedbus.dao.criteria.dictionnary.maker.metier.FavorisSearchCriteriaMaker" />
-
-	<!-- ============================= -->
-	<!-- HORAIRE                       -->
-	<!-- ============================= -->		
-	<bean id="horaireSearchCriteriaMaker" class="net.naonedbus.dao.criteria.dictionnary.maker.metier.HoraireSearchCriteriaMaker" />
 	
 </beans>

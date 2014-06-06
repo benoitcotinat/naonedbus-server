@@ -50,7 +50,6 @@ import java.util.List;
 import net.naonedbus.dao.common.GenericDao;
 import net.naonedbus.model.Arret;
 import net.naonedbus.model.criteria.impl.ArretSearchCriteria;
-import net.naonedbus.model.criteria.impl.ArretsWithHorairesSearchCriteria;
 import net.naonedbus.service.common.impl.GenericServiceImpl;
 import net.naonedbus.service.metier.ArretService;
 
@@ -98,15 +97,5 @@ public class ArretServiceImpl
             arret = arrets.get(0);
         }
         return arret;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<Arret> getArretsWithHoraires()
-    {
-        final ArretsWithHorairesSearchCriteria crit = new ArretsWithHorairesSearchCriteria();
-        return this.getAll(crit);
     }
 }

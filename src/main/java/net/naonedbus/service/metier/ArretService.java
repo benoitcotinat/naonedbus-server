@@ -45,8 +45,6 @@ package net.naonedbus.service.metier;
  */
 
 
-import java.util.List;
-
 import net.naonedbus.model.Arret;
 import net.naonedbus.service.common.GenericService;
 
@@ -68,10 +66,4 @@ public interface ArretService
     Arret get(final String codeLigne,
               final String codeSens,
               final String codeArret);
-
-    /**
-     * Méthode en charge de retourner la liste des arrêts qui ont des horaires.
-     * @return Liste des arrêts qui ont des horaires
-     */
-    List<Arret> getArretsWithHoraires();
 }
