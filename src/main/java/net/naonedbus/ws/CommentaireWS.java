@@ -30,15 +30,15 @@ package net.naonedbus.ws;
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
- * published by the Free Software Foundation, either version 3 of the 
+ * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public 
+ *
+ * You should have received a copy of the GNU General Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
@@ -65,8 +65,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Web Service publiant les contrats d'accès aux commentaires.
- * @author Benoît
+ * Web Service publiant les contrats d'accÃ¨s aux commentaires.
+ * @author BenoÃ®t
  * @version $Revision$ $Date$
  */
 @Path("commentaire")
@@ -85,13 +85,13 @@ public class CommentaireWS
     private CommentaireService commentaireService;
 
     /**
-     * Méthode en charge de sauvegarder un commentaire.
-     * @param codeLigne Code de la ligne concernée.
-     * @param codeSens Code du sens concerné.
-     * @param codeArret Code de l'arrêt concerné.
-     * @param message Message à sauvegarder.
-     * @param signedMessage Hash chiffré des paramètres.
-     * @param idClient Clé permettant de vérifier l'intégrité des données transmises.
+     * MÃ©thode en charge de sauvegarder un commentaire.
+     * @param codeLigne Code de la ligne concernÃ©e.
+     * @param codeSens Code du sens concernÃ©.
+     * @param codeArret Code de l'arrÃªt concernÃ©.
+     * @param message Message Ã  sauvegarder.
+     * @param cryptedHash Hash chiffrÃ© des paramÃ¨tres.
+     * @param idClient ClÃ© permettant de vÃ©rifier l'intÃ©gritÃ© des donnÃ©es transmises.
      * @throws NaonedbusException En cas de chiffrement non valide.
      */
     @POST
@@ -99,13 +99,13 @@ public class CommentaireWS
                      final @QueryParam("codeSens") String codeSens,
                      final @QueryParam("codeArret") String codeArret,
                      final @QueryParam("message") String message,
-                     final @QueryParam("hash") String signedMessage,
+                     final @QueryParam("hash") String cryptedHash,
                      final @QueryParam("idClient") String idClient)
     {
         if (this.log.isDebugEnabled())
         {
             final StringBuilder sb = new StringBuilder();
-            sb.append(" => Réception d'un commentaire de l'application ");
+            sb.append(" => RÃ©ception d'un commentaire de l'application ");
             sb.append(idClient);
             sb.append(" pour l'arret ");
             sb.append(codeArret);
@@ -115,8 +115,8 @@ public class CommentaireWS
             sb.append(codeLigne);
             sb.append(" - Message = >");
             sb.append(message);
-            sb.append("< - Hash chiffré = >");
-            sb.append(signedMessage);
+            sb.append("< - Hash chiffrÃ© = >");
+            sb.append(cryptedHash);
             sb.append("<");
             this.log.debug(sb.toString());
         }
@@ -127,7 +127,7 @@ public class CommentaireWS
                                                            codeSens,
                                                            codeArret,
                                                            message,
-                                                           signedMessage,
+                                                           cryptedHash,
                                                            idClient);
         }
         catch (final NaonedbusException e)
@@ -137,14 +137,14 @@ public class CommentaireWS
     }
 
     /**
-     * Retourne la liste des commentaires concernés par les critères.
+     * Retourne la liste des commentaires concernÃ©s par les critÃ¨res.
      * @param codeLigne Code de la ligne.
      * @param codeSens Code du sens.
-     * @param codeArret Code de l'arrêt.
-     * @param timestamp Date à partir de quand on veut les commentaires.
+     * @param codeArret Code de l'arrÃªt.
+     * @param timestamp Date Ã  partir de quand on veut les commentaires.
      * @param limit Nombre maximum de commentaires voulus.
      * @return Liste des commentaires.
-     * @throws NaonedbusException Si erreur lors de la récupération des commentaires.
+     * @throws NaonedbusException Si erreur lors de la rÃ©cupÃ©ration des commentaires.
      */
     @GET
     @Produces(
@@ -159,13 +159,13 @@ public class CommentaireWS
         if (this.log.isDebugEnabled())
         {
             final StringBuilder sb = new StringBuilder();
-            sb.append(" => Récupération des commentaires pour la ligne : ");
+            sb.append(" => RÃ©cupÃ©ration des commentaires pour la ligne : ");
             sb.append(codeLigne);
             sb.append(", le sens ");
             sb.append(codeSens);
             sb.append(" et l'arret ");
             sb.append(codeArret);
-            sb.append(", à partir de ");
+            sb.append(", Ã  partir de ");
             sb.append(timestamp);
             sb.append(" dans la limite de ");
             sb.append(limit);
@@ -181,9 +181,9 @@ public class CommentaireWS
 
     /**
      * Supprime un commentaire.
-     * @param id ID du commentaire à supprimer.
-     * @param cryptedHash Hash chiffré des paramètres.
-     * @param idClient Clé permettant de vérifier l'intégrité des données transmises.
+     * @param id ID du commentaire Ã  supprimer.
+     * @param cryptedHash Hash chiffrÃ© des paramÃ¨tres.
+     * @param idClient ClÃ© permettant de vÃ©rifier l'intÃ©gritÃ© des donnÃ©es transmises.
      * @throws NaonedbusException
      */
     @POST
@@ -200,7 +200,7 @@ public class CommentaireWS
             sb.append(id);
             sb.append(" de la part du client ");
             sb.append(idClient);
-            sb.append(" - Hash chiffré = >");
+            sb.append(" - Hash chiffrÃ© = >");
             sb.append(cryptedHash);
             sb.append("<");
             this.log.debug(sb.toString());
@@ -220,7 +220,7 @@ public class CommentaireWS
 
     /**
      * Setter pour commentaireService.
-     * @param commentaireService Le commentaireService à écrire.
+     * @param commentaireService Le commentaireService Ã  Ã©crire.
      */
     public void setCommentaireService(final CommentaireService commentaireService)
     {

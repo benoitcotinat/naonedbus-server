@@ -76,8 +76,8 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 
 /**
- * Service spécifiques aux commentaires.
- * @author Benoît
+ * Service spÃ©cifiques aux commentaires.
+ * @author BenoÃ®t
  * @version $Revision$ $Date$
  */
 public class CommentaireServiceImpl
@@ -125,7 +125,7 @@ public class CommentaireServiceImpl
     private Map<String, List<CommentaireDestroyer>> commentaireDestroyers;
 
     /**
-     * Helper de sécurité.
+     * Helper de sÃ©curitÃ©.
      */
     @Resource(name = "securityHelper")
     private SecurityHelper securityHelper;
@@ -168,7 +168,7 @@ public class CommentaireServiceImpl
         }
         else
         {
-            this.log.error("Soumission d'un commentaire avec une signature non valide pour le client "
+            this.log.error("Soumission d'un commentaire avec un hash non valide pour le client "
                            + idClient);
             throw new NaonedbusException();
         }
@@ -222,12 +222,12 @@ public class CommentaireServiceImpl
      */
     @Override
     public void delete(final int id,
-                       final String signedMessage,
+                       final String cryptedHash,
                        final String idClient)
         throws NaonedbusException
     {
         if (this.securityHelper.validate(NaonedbusClient.NAONEDBUS_SERVICE.name(),
-                                         signedMessage,
+                                         cryptedHash,
                                          String.valueOf(id)))
         {
             final Commentaire commentaire = this.get(id);
@@ -248,8 +248,8 @@ public class CommentaireServiceImpl
         }
     }
     /**
-     * Méthode en charge de poster le commentaire.
-     * @param commentaire Commentaire envoyé par l'utilisateur
+     * MÃ©thode en charge de poster le commentaire.
+     * @param commentaire Commentaire envoyÃ© par l'utilisateur
      */
     void postCommentaire(final Commentaire commentaire)
     {
@@ -263,7 +263,7 @@ public class CommentaireServiceImpl
 
     /**
      * Setter pour commentaireFactory.
-     * @param commentaireFactory Le commentaireFactory à écrire.
+     * @param commentaireFactory Le commentaireFactory Ã  Ã©crire.
      */
     public void setCommentaireFactory(final CommentaireFactory commentaireFactory)
     {
@@ -272,7 +272,7 @@ public class CommentaireServiceImpl
 
     /**
      * Setter pour securityHelper.
-     * @param securityHelper Le securityHelper à écrire.
+     * @param securityHelper Le securityHelper Ã  Ã©crire.
      */
     public void setSecurityHelper(final SecurityHelper securityHelper)
     {
@@ -300,7 +300,7 @@ public class CommentaireServiceImpl
 
     /**
      * Setter pour commentaireRetrievers.
-     * @param commentaireRetrievers Le commentaireRetrievers à écrire.
+     * @param commentaireRetrievers Le commentaireRetrievers Ã  Ã©crire.
      */
     public void setCommentaireRetrievers(final List<CommentaireRetriever> commentaireRetrievers)
     {
@@ -309,7 +309,7 @@ public class CommentaireServiceImpl
 
     /**
      * Setter pour commentairePublishers.
-     * @param commentairePublishers Le commentairePublishers à écrire.
+     * @param commentairePublishers Le commentairePublishers Ã  Ã©crire.
      */
     public void setCommentairePublishers(final Map<String, List<CommentairePublisher>> commentairePublishers)
     {
@@ -318,7 +318,7 @@ public class CommentaireServiceImpl
 
     /**
      * Setter pour commentaireDestroyers.
-     * @param commentaireDestroyers Le commentaireDestroyers à écrire.
+     * @param commentaireDestroyers Le commentaireDestroyers Ã  Ã©crire.
      */
     public void setCommentaireDestroyers(final Map<String, List<CommentaireDestroyer>> commentaireDestroyers)
     {
