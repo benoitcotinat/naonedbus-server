@@ -173,6 +173,39 @@ public class CommentaireServiceImpl
             throw new NaonedbusException();
         }
     }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void manageSignedMessage(final String codeLigne,
+                                    final String codeSens,
+                                    final String codeArret,
+                                    final String message,
+                                    final String signedMessage,
+                                    final String idClient)
+        throws NaonedbusException
+    {
+        if (this.securityHelper.validateSignedMessage(idClient,
+                                         signedMessage,
+                                         codeLigne,
+                                         codeSens,
+                                         codeArret,
+                                         message))
+        {
+            final Commentaire commentaire = this.commentaireFactory.getInitializedObject(codeLigne,
+                                                                                         codeSens,
+                                                                                         codeArret,
+                                                                                         idClient,
+                                                                                         message);
+            this.postCommentaire(commentaire);
+        }
+        else
+        {
+            this.log.error("Soumission d'un commentaire avec une signature non valide pour le client "
+                           + idClient);
+            throw new NaonedbusException();
+        }
+    }
 
     /**
      * {@inheritDoc}

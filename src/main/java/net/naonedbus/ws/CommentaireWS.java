@@ -30,15 +30,15 @@ package net.naonedbus.ws;
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
- * published by the Free Software Foundation, either version 3 of the 
+ * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public 
+ *
+ * You should have received a copy of the GNU General Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
@@ -90,12 +90,64 @@ public class CommentaireWS
      * @param codeSens Code du sens concerné.
      * @param codeArret Code de l'arrêt concerné.
      * @param message Message à sauvegarder.
-     * @param signedMessage Hash chiffré des paramètres.
+     * @param cryptedHash Hash chiffré des paramètres.
      * @param idClient Clé permettant de vérifier l'intégrité des données transmises.
      * @throws NaonedbusException En cas de chiffrement non valide.
      */
     @POST
     public void save(final @QueryParam("codeLigne") String codeLigne,
+                     final @QueryParam("codeSens") String codeSens,
+                     final @QueryParam("codeArret") String codeArret,
+                     final @QueryParam("message") String message,
+                     final @QueryParam("hash") String cryptedHash,
+                     final @QueryParam("idClient") String idClient)
+    {
+        if (this.log.isDebugEnabled())
+        {
+            final StringBuilder sb = new StringBuilder();
+            sb.append(" => Réception d'un commentaire de l'application ");
+            sb.append(idClient);
+            sb.append(" pour l'arret ");
+            sb.append(codeArret);
+            sb.append(", sens ");
+            sb.append(codeSens);
+            sb.append(" de la ligne ");
+            sb.append(codeLigne);
+            sb.append(" - Message = >");
+            sb.append(message);
+            sb.append("< - Hash chiffré = >");
+            sb.append(cryptedHash);
+            sb.append("<");
+            this.log.debug(sb.toString());
+        }
+
+        try
+        {
+            this.commentaireService.manageEncryptedMessage(codeLigne,
+                                                           codeSens,
+                                                           codeArret,
+                                                           message,
+                                                           cryptedHash,
+                                                           idClient);
+        }
+        catch (final NaonedbusException e)
+        {
+            throw new WebApplicationException(Status.FORBIDDEN);
+        }
+    }
+    /**
+     * Méthode en charge de sauvegarder un commentaire.
+     * @param codeLigne Code de la ligne concernée.
+     * @param codeSens Code du sens concerné.
+     * @param codeArret Code de l'arrêt concerné.
+     * @param message Message à sauvegarder.
+     * @param signedMessage Hash chiffré des paramètres.
+     * @param idClient Clé permettant de vérifier l'intégrité des données transmises.
+     * @throws NaonedbusException En cas de chiffrement non valide.
+     */
+    @POST
+    @Path("v2")
+    public void saveV2(final @QueryParam("codeLigne") String codeLigne,
                      final @QueryParam("codeSens") String codeSens,
                      final @QueryParam("codeArret") String codeArret,
                      final @QueryParam("message") String message,
@@ -115,7 +167,7 @@ public class CommentaireWS
             sb.append(codeLigne);
             sb.append(" - Message = >");
             sb.append(message);
-            sb.append("< - Hash chiffré = >");
+            sb.append("< - Signature = >");
             sb.append(signedMessage);
             sb.append("<");
             this.log.debug(sb.toString());
@@ -123,7 +175,7 @@ public class CommentaireWS
 
         try
         {
-            this.commentaireService.manageEncryptedMessage(codeLigne,
+            this.commentaireService.manageSignedMessage(codeLigne,
                                                            codeSens,
                                                            codeArret,
                                                            message,

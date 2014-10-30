@@ -30,15 +30,15 @@ package net.naonedbus.service.metier;
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
- * published by the Free Software Foundation, either version 3 of the 
+ * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public 
+ *
+ * You should have received a copy of the GNU General Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
@@ -76,6 +76,24 @@ public interface CommentaireService
                                 final String message,
                                 final String cryptedHash,
                                 final String idClient)
+        throws NaonedbusException;
+    /**
+     * Méthode en charge de gérer un message signé : déchiffrement, vérification, et sauvegarde
+     * le cas échéant.
+     * @param codeLigne Ligne de l'arrêt
+     * @param codeSens Sens de l'arrêt
+     * @param codeArret Arrêt dont on veut les horaires
+     * @param message à sauvegarder
+     * @param cryptedHash Hash des paramètres.
+     * @param idClient Clé permettant de vérifier l'intégrité des données transmises
+     * @throws NaonedbusException Si le chiffrement n'est pas valide
+     */
+    void manageSignedMessage(final String codeLigne,
+                             final String codeSens,
+                             final String codeArret,
+                             final String message,
+                             final String signedMessage,
+                             final String idClient)
         throws NaonedbusException;
 
     /**

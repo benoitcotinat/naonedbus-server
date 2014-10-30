@@ -46,7 +46,9 @@ package net.naonedbus.utils;
 
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
+import java.security.Key;
 import java.security.PublicKey;
 import java.security.Security;
 import java.security.Signature;
@@ -56,6 +58,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import net.naonedbus.security.CommonKey;
+import net.naonedbus.security.KeyType;
 import net.naonedbus.security.RSAUtils;
 
 import org.apache.commons.lang.StringUtils;
@@ -87,40 +90,105 @@ public class SecurityHelper
      */
     @Resource(name = "keys")
     private Map<String, CommonKey> keys;
+    /**
+     * Liste des signatures de l'application.
+     */
+    @Resource(name = "signatures")
+    private Map<String, String> signatures;
 
     /**
      * Méthode en charge de chiffrer les arguments avec une clé, et de vérifier que ce résultat
      * correspond au hash fournit.
      * @param idClient Identifiant du client, permettant de récupérer la clé.
-     * @param signedMessage Hash des paramètres.
+     * @param cryptedHash Hash des paramètres.
      * @param args Arguments à checker.
      * @return {@code true} si les arguments matchent le hash
      */
     public Boolean validate(final String idClient,
-                            final String signedMessage,
+                            final String cryptedHash,
                             final String... args)
     {
         Boolean isValid = Boolean.FALSE;
 
-        final String concat = StringUtils.join(args);
-        // Déchiffrement et vérification
+        final String hashCode = RSAUtils.getConcatHashCode(args);
+        // DÃ©chiffrement et vÃ©rification
         final CommonKey naoKey = this.keys.get(idClient.toLowerCase());
         try
         {
             final BouncyCastleProvider bcp = new BouncyCastleProvider();
             Security.addProvider(bcp);
 
-            final PublicKey key = RSAUtils.genNaonedbusKey(naoKey.getModulo(),
-                                                           naoKey.getExposant());
+            final Key key = RSAUtils.genNaonedbusKey(KeyType.PUBLIC,
+                                                     naoKey.getModulo(),
+                                                     naoKey.getExposant());
+            final String decryptedHash = RSAUtils.decryptBase64(cryptedHash,
+                                                                key);
+
+            isValid = decryptedHash.equals(hashCode);
+
+            if (!isValid)
+            {
+                this.log.debug("VÃ©rification du hash incorrecte :\n"
+                               + "\tHashCode dÃ©chiffrÃ© : "
+                               + decryptedHash
+                               + "\n\tHashCode calculÃ©   : "
+                               + hashCode.toString()
+                               + "\tpour les arguments : "
+                               + Arrays.asList(args));
+            }
+        }
+        catch (final GeneralSecurityException e)
+        {
+            this.log
+.error("Erreur lors de la gÃ©nÃ©ration de la clÃ© ou du chiffrement du message de "
+                                   + idClient
+                                   + " avec les paramÃ¨tres "
+                                   + Arrays.asList(args),
+                           e);
+        }
+        catch (final UnsupportedEncodingException e)
+        {
+            this.log.error("Erreur lors du chiffrement du message de "
+                                   + idClient
+                                   + " avec les paramÃ¨tres "
+                                   + Arrays.asList(args),
+                           e);
+        }
+
+        return isValid;
+    }
+    /**
+     * Méthode en charge de chiffrer les arguments avec une clé, et de vérifier que ce résultat
+     * correspond au hash fournit.
+     * @param idClient Identifiant du client, permettant de récupérer la clé.
+     * @param cryptedHash Hash des paramètres.
+     * @param args Arguments à checker.
+     * @return {@code true} si les arguments matchent le hash
+     */
+    public Boolean validateSignedMessage(final String idClient,
+                                         final String signedMessage,
+                                         final String... args)
+    {
+        Boolean isValid = Boolean.FALSE;
+
+        final String concat = StringUtils.join(args);
+        // DÃ©chiffrement et vÃ©rification
+        final String signaturePEM = this.signatures.get(idClient.toLowerCase());
+        try
+        {
+            final BouncyCastleProvider bcp = new BouncyCastleProvider();
+            Security.addProvider(bcp);
+
+            final PublicKey key = RSAUtils.genNaonedbusKey(signaturePEM);
             final Signature signature = Signature.getInstance("SHA1withRSA");
             signature.initVerify(key);
             signature.update(concat.getBytes());
 
-            isValid = signature.verify(signedMessage.getBytes());
+            isValid = signature.verify(Base64.decode(signedMessage.getBytes()));
 
             if (!isValid)
             {
-                this.log.debug("Vérification de la signature incorrecte :\n"
+                this.log.debug("VÃ©rification de la signature incorrecte :\n"
                                + "\tMessage : "
                                + concat
                                + "\n\tSignature  : "
@@ -129,12 +197,11 @@ public class SecurityHelper
                                + Arrays.asList(args));
             }
         }
-        catch (final GeneralSecurityException e)
+        catch (final GeneralSecurityException | Base64DecoderException e)
         {
-            this.log
-                    .error("Erreur lors de la génération de la clé ou du chiffrement du message de "
+            this.log.error("Erreur lors de la gÃ©nÃ©ration de la clÃ© ou du chiffrement du message de "
                                    + idClient
-                                   + " avec les paramètres "
+                                   + " avec les paramÃ¨tres "
                                    + Arrays.asList(args),
                            e);
         }
@@ -149,5 +216,9 @@ public class SecurityHelper
     public void setKeys(final Map<String, CommonKey> keys)
     {
         this.keys = keys;
+    }
+    public void setSignatures(final Map<String, String> signatures)
+    {
+        this.signatures = signatures;
     }
 }
