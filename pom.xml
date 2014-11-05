@@ -42,6 +42,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
 		<activation-version>1.1.1</activation-version>
+        <bcprov-jdk16-version>140</bcprov-jdk16-version><!-- 1.46 / 146 ? -->
 		<bsh-version>1.3.0</bsh-version>
 		<c3p0-version>0.9.1.2</c3p0-version>
 		<commons-beanutils-version>1.8.3</commons-beanutils-version>
@@ -68,14 +69,12 @@
 		<jpa-version>1.0.0.Final</jpa-version><!-- 1.0.1.Final -->
 		<mysql-connector-java-version>5.1.16</mysql-connector-java-version>
 		<rhino-js-version>1.7R2</rhino-js-version>
-		<saxon-version>9.1.0.8</saxon-version>
 		<servlet-api-version>2.5</servlet-api-version>
 		<slf4j-version>1.6.1</slf4j-version><!-- 1.6.4 -->
 		<spring-version>3.1.0.RELEASE</spring-version><!-- 3.1.1.RELEASE -->
 <!-- 		<twitter4j-version>2.2.5</twitter4j-version> -->
 		<twitter4j-version>4.0.1</twitter4j-version>
 		<validation-api-version>1.0.0.GA</validation-api-version>
-		<webharvest-version>2.1.0-SNAPSHOT</webharvest-version>
 		<xmlbeans-version>2.4.0</xmlbeans-version><!-- 2.5.0 -->
 		
 		<!-- TESTS -->
@@ -125,13 +124,11 @@
 	</repositories>  
 
     <dependencies>
-    	
-    	<dependency>
-    		<groupId>net.naonedbus</groupId>
-    		<artifactId>naonedbus-common</artifactId>
-    		<version>1.0</version>
-    	</dependency>
-    
+        <dependency>
+            <groupId>bouncycastle</groupId>
+            <artifactId>bcprov-jdk16</artifactId>
+            <version>${bcprov-jdk16-version}</version>
+        </dependency>
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
@@ -148,6 +145,11 @@
 			<artifactId>commons-beanutils</artifactId>
 			<version>${commons-beanutils-version}</version>
 		</dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec-version}</version>
+        </dependency>
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
@@ -255,11 +257,6 @@
 			<version>${commons-codec-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>commons-email</groupId>
-			<artifactId>commons-email</artifactId>
-			<version>${commons-email-version}</version>
-		</dependency>
-		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 			<version>${commons-httpclient-version}</version>
@@ -293,21 +290,6 @@
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>${javax-mail-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.saxon</groupId>
-			<artifactId>saxon</artifactId>
-			<version>${saxon-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.saxon</groupId>
-			<artifactId>saxon-dom</artifactId>
-			<version>${saxon-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.webharvest</groupId>
-			<artifactId>webharvest_2</artifactId>
-			<version>${webharvest-version}</version>
 		</dependency>
     
     	<!-- HIBERNATE -->

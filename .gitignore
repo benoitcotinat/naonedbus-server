@@ -4,3 +4,4 @@
 /src/main/filters/local-*.properties
 /target
 /target/*
+/bin/
