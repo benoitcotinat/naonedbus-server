@@ -18,7 +18,8 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import org.apache.commons.codec.binary.Base64;
+import net.naonedbus.utils.Base64;
+import net.naonedbus.utils.Base64DecoderException;
 
 /**
  * Classe fournissant des services de chiffrement et déchiffrement.
@@ -102,14 +103,14 @@ public class RSAUtils
      * @param mod Modulo.
      * @param exp Exposant
      * @return Clé générée.
+     * @throws Base64DecoderException
      * @throws Erreur à l'initialisation de la clé.
      */
     public static PublicKey genNaonedbusKey(final String signaturePEM)
-        throws GeneralSecurityException
+        throws GeneralSecurityException,
+            Base64DecoderException
     {
-        final KeyFactory keyFactory = KeyFactory.getInstance(RSAUtils.ALGORITHM_KEY_GEN,
-                                                       RSAUtils.PROVIDER);
-        final byte[] decodedKey = Base64.decodeBase64(signaturePEM);
+        final byte[] decodedKey = Base64.decode(signaturePEM);
 
         final X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(decodedKey);
         final KeyFactory fact = KeyFactory.getInstance("DSA");
@@ -173,8 +174,7 @@ public class RSAUtils
         cipher.init(Cipher.ENCRYPT_MODE,
                     key);
 
-        return new String(Base64.encodeBase64(cipher.doFinal(data.getBytes())),
-                          "UTF-8");
+        return new String(Base64.encode(cipher.doFinal(data.getBytes())));
     }
 
     /**
@@ -222,6 +222,7 @@ public class RSAUtils
      * @throws BadPaddingException
      * @throws UnsupportedEncodingException
      * @throws NoSuchProviderException
+     * @throws Base64DecoderException
      */
     public static String decryptBase64(final String data,
                                        final Key key)
@@ -231,9 +232,10 @@ public class RSAUtils
             IllegalBlockSizeException,
             BadPaddingException,
             UnsupportedEncodingException,
-            NoSuchProviderException
+            NoSuchProviderException,
+            Base64DecoderException
     {
-        final byte[] src = Base64.decodeBase64(data.getBytes());
+        final byte[] src = Base64.decode(data.getBytes());
         return RSAUtils.decrypt(src,
                                 key);
     }

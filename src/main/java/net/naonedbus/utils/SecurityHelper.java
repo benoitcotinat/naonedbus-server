@@ -137,18 +137,10 @@ public class SecurityHelper
                                + Arrays.asList(args));
             }
         }
-        catch (final GeneralSecurityException e)
+        catch (final GeneralSecurityException | UnsupportedEncodingException | Base64DecoderException e)
         {
             this.log
 .error("Erreur lors de la gÃ©nÃ©ration de la clÃ© ou du chiffrement du message de "
-                                   + idClient
-                                   + " avec les paramÃ¨tres "
-                                   + Arrays.asList(args),
-                           e);
-        }
-        catch (final UnsupportedEncodingException e)
-        {
-            this.log.error("Erreur lors du chiffrement du message de "
                                    + idClient
                                    + " avec les paramÃ¨tres "
                                    + Arrays.asList(args),
