@@ -59,8 +59,6 @@
     <bean id="commentaireBDDRetriever" class="net.naonedbus.service.commentaire.retriever.impl.CommentaireBDDRetriever" />
     <bean id="commentaireTwitterRetriever" class="net.naonedbus.service.commentaire.retriever.impl.CommentaireTwitterRetriever" />
     <util:list id="twitterAccountsToRetrieve" list-class="java.util.ArrayList" value-type="java.lang.String">
-<!--         <value type="java.lang.String">tan_trafic</value> -->
-<!--         <value type="java.lang.String">tan_actus</value> -->
         <value type="java.lang.String">infotrafic_tan</value>
         <value type="java.lang.String">taninfos</value>
     </util:list>

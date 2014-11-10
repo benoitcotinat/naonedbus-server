@@ -159,11 +159,6 @@
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="FILE" />
 	</logger>
-	<logger name="org.webharvest.definition.XmlParser">
-		<level value="ERROR" />
-		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="FILE" />
-	</logger>
 	<logger name="org.apache.commons.httpclient">
 		<level value="ERROR" />
 		<appender-ref ref="CONSOLE" />
