@@ -280,6 +280,7 @@ public class CommentaireServiceImpl
             throw new NaonedbusException();
         }
     }
+
     /**
      * Méthode en charge de poster le commentaire.
      * @param commentaire Commentaire envoyé par l'utilisateur

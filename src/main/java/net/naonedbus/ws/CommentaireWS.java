@@ -137,50 +137,50 @@ public class CommentaireWS
     }
     /**
      * Méthode en charge de sauvegarder un commentaire.
-     * @param codeLigne Code de la ligne concernée.
-     * @param codeSens Code du sens concerné.
-     * @param codeArret Code de l'arrêt concerné.
-     * @param message Message à sauvegarder.
-     * @param signedMessage Hash chiffré des paramètres.
-     * @param idClient Clé permettant de vérifier l'intégrité des données transmises.
+     * @param routeCode Code de la ligne concernée.
+     * @param directionCode Code du sens concerné.
+     * @param stopCode Code de l'arrêt concerné.
+     * @param content Message à sauvegarder.
+     * @param signature Hash chiffré des paramètres.
+     * @param client Clé permettant de vérifier l'intégrité des données transmises.
      * @throws NaonedbusException En cas de chiffrement non valide.
      */
     @POST
     @Path("v2")
-    public void saveV2(final @QueryParam("codeLigne") String codeLigne,
-                     final @QueryParam("codeSens") String codeSens,
-                     final @QueryParam("codeArret") String codeArret,
-                     final @QueryParam("message") String message,
-                     final @QueryParam("hash") String signedMessage,
-                     final @QueryParam("idClient") String idClient)
+    public void saveV2(final @QueryParam("routeCode") String routeCode,
+                       final @QueryParam("directionCode") String directionCode,
+                       final @QueryParam("stopCode") String stopCode,
+                       final @QueryParam("content") String content,
+                       final @QueryParam("signature") String signature,
+                       final @QueryParam("client") String client)
     {
         if (this.log.isDebugEnabled())
         {
             final StringBuilder sb = new StringBuilder();
             sb.append(" => Réception d'un commentaire de l'application ");
-            sb.append(idClient);
+            sb.append(client);
             sb.append(" pour l'arret ");
-            sb.append(codeArret);
+            sb.append(stopCode);
             sb.append(", sens ");
-            sb.append(codeSens);
+            sb.append(directionCode);
             sb.append(" de la ligne ");
-            sb.append(codeLigne);
+            sb.append(routeCode);
             sb.append(" - Message = >");
-            sb.append(message);
+            sb.append(content);
             sb.append("< - Signature = >");
-            sb.append(signedMessage);
+            sb.append(signature);
             sb.append("<");
             this.log.debug(sb.toString());
         }
 
         try
         {
-            this.commentaireService.manageSignedMessage(codeLigne,
-                                                           codeSens,
-                                                           codeArret,
-                                                           message,
-                                                           signedMessage,
-                                                           idClient);
+            this.commentaireService.manageSignedMessage(routeCode,
+                                                        directionCode,
+                                                        stopCode,
+                                                        content,
+                                                        signature,
+                                                        client);
         }
         catch (final NaonedbusException e)
         {
@@ -227,6 +227,49 @@ public class CommentaireWS
         return this.commentaireService.get(codeLigne,
                                            codeSens,
                                            codeArret,
+                                           timestamp,
+                                           limit);
+    }
+
+    /**
+     * Retourne la liste des commentaires concernés par les critères.
+     * @param routeCode Code de la ligne.
+     * @param directionCode Code du sens.
+     * @param stopCode Code de l'arrêt.
+     * @param timestamp Date à partir de quand on veut les commentaires.
+     * @param limit Nombre maximum de commentaires voulus.
+     * @return Liste des commentaires.
+     * @throws NaonedbusException Si erreur lors de la récupération des commentaires.
+     */
+    @GET
+    @Path("v2")
+    @Produces({MediaType.APPLICATION_JSON })
+    public List<Commentaire> getV2(final @QueryParam("routeCode") String routeCode,
+                                   final @QueryParam("directionCode") String directionCode,
+                                   final @QueryParam("stopCode") String stopCode,
+                                   final @QueryParam("timestamp") long timestamp,
+                                   final @QueryParam("limit") int limit)
+        throws NaonedbusException
+    {
+        if (this.log.isDebugEnabled())
+        {
+            final StringBuilder sb = new StringBuilder();
+            sb.append(" => Récupération des commentaires pour la ligne : ");
+            sb.append(routeCode);
+            sb.append(", le sens ");
+            sb.append(directionCode);
+            sb.append(" et l'arret ");
+            sb.append(stopCode);
+            sb.append(", à partir de ");
+            sb.append(timestamp);
+            sb.append(" dans la limite de ");
+            sb.append(limit);
+            sb.append(" commentaires.");
+            this.log.debug(sb.toString());
+        }
+        return this.commentaireService.get(routeCode,
+                                           directionCode,
+                                           stopCode,
                                            timestamp,
                                            limit);
     }

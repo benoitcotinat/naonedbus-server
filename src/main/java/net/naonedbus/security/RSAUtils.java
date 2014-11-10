@@ -111,10 +111,9 @@ public class RSAUtils
             Base64DecoderException
     {
         final byte[] decodedKey = Base64.decode(signaturePEM);
-
-        final X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(decodedKey);
-        final KeyFactory fact = KeyFactory.getInstance("DSA");
-        return fact.generatePublic(x509EncodedKeySpec);
+        final KeyFactory fact = KeyFactory.getInstance(ALGORITHM_KEY_GEN,
+                                                       PROVIDER);
+        return fact.generatePublic(new X509EncodedKeySpec(decodedKey));
     }
 
     /**
@@ -174,7 +173,7 @@ public class RSAUtils
         cipher.init(Cipher.ENCRYPT_MODE,
                     key);
 
-        return new String(Base64.encode(cipher.doFinal(data.getBytes())));
+        return Base64.encode(cipher.doFinal(data.getBytes()));
     }
 
     /**

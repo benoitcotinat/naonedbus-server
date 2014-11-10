@@ -128,10 +128,10 @@ public class SecurityHelper
 
             if (!isValid)
             {
-                this.log.debug("VÃ©rification du hash incorrecte :\n"
-                               + "\tHashCode dÃ©chiffrÃ© : "
+                this.log.debug("Vérification du hash incorrecte :\n"
+                               + "\tHashCode déchiffré : "
                                + decryptedHash
-                               + "\n\tHashCode calculÃ©   : "
+                               + "\n\tHashCode calculé   : "
                                + hashCode.toString()
                                + "\tpour les arguments : "
                                + Arrays.asList(args));
