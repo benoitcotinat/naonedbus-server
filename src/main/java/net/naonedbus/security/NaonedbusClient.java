@@ -26,11 +26,6 @@ public enum NaonedbusClient
     NAONEDBUS_SERVICE,
 
     /**
-     * Site internet www.simpletan.fr.
-     */
-    SIMPLETAN,
-
-    /**
      * Compte twitter du trafic de la tan.
      */
     TWITTER_TAN_ACTUS("tan_trafic"),

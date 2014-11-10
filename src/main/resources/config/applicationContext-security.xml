@@ -43,13 +43,11 @@
 		 <entry key="naonedbus" value-ref="naonedbusKey" />
 		 <entry key="naonedbus_ios" value-ref="naonedbusiOSKey" />
 		 <entry key="naonedbus_service" value-ref="naonedbusServiceKey" />
-		 <entry key="simpletan" value-ref="simpletanKey" />
 	</util:map>
 	<util:map id="signatures" key-type="java.lang.String" value-type="java.lang.String" map-class="java.util.HashMap">
 		 <entry key="naonedbus" value="${naonedbus.signature}" />
 		 <entry key="naonedbus_ios" value="${naonedbus_ios.signature}" />
 		 <entry key="naonedbus_service" value="${naonedbus_service.signature}" />
-		 <entry key="simpletan" value="" />
 	</util:map>
 
 	<!-- ============================= -->
@@ -74,14 +72,6 @@
 	<bean id="naonedbusServiceKey" class="net.naonedbus.security.CommonKey">
 		<property name="modulo" value="${naonedbus_service.mod}" />
 		<property name="exposant" value="${naonedbus_service.exp}" />
-	</bean>
-
-	<!-- ============================= -->
-	<!-- CLE - SIMPLETAN               -->
-	<!-- ============================= -->		
-	<bean id="simpletanKey" class="net.naonedbus.security.CommonKey">
-		<property name="modulo" value="${simpletan.mod}" />
-		<property name="exposant" value="${simpletan.exp}" />
 	</bean>
 	
 	
