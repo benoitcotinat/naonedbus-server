@@ -46,22 +46,17 @@ package net.naonedbus.model;
 
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import net.naonedbus.model.common.IArret;
 
 import org.hibernate.annotations.Index;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  * Défini un arret
@@ -93,14 +88,6 @@ public class Arret
     private String normalizedNom;
 
     /**
-     * Horaires de cet arrêt.
-     */
-    @OneToMany(mappedBy = "arret", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.TRUE)
-    // @Transient
-    private List<Horaire> horaires;
-
-    /**
      * Latitude GPS.
      */
     @Column(name = "latitude", nullable = true)
@@ -125,6 +112,7 @@ public class Arret
      * Getter pour nom.
      * @return Le nom
      */
+    @Override
     public String getNom()
     {
         return this.nom;
@@ -134,6 +122,7 @@ public class Arret
      * Setter pour nom.
      * @param nom Le nom à écrire.
      */
+    @Override
     public void setNom(final String nom)
     {
         this.nom = nom;
@@ -143,6 +132,7 @@ public class Arret
      * Getter pour normalizedNom.
      * @return Le normalizedNom
      */
+    @Override
     public String getNormalizedNom()
     {
         return this.normalizedNom;
@@ -152,33 +142,17 @@ public class Arret
      * Setter pour normalizedNom.
      * @param normalizedNom Le normalizedNom à écrire.
      */
+    @Override
     public void setNormalizedNom(final String normalizedNom)
     {
         this.normalizedNom = normalizedNom;
     }
 
     /**
-     * Getter pour horaires.
-     * @return Le horaires
-     */
-    public List<Horaire> getHoraires()
-    {
-        return this.horaires;
-    }
-
-    /**
-     * Setter pour horaires.
-     * @param horaires Le horaires à écrire.
-     */
-    public void setHoraires(final List<Horaire> horaires)
-    {
-        this.horaires = horaires;
-    }
-
-    /**
      * Getter pour latitude.
      * @return Le latitude
      */
+    @Override
     public Double getLatitude()
     {
         return this.latitude;
@@ -188,6 +162,7 @@ public class Arret
      * Setter pour latitude.
      * @param latitude Le latitude à écrire.
      */
+    @Override
     public void setLatitude(final Double latitude)
     {
         this.latitude = latitude;
@@ -197,6 +172,7 @@ public class Arret
      * Getter pour longitude.
      * @return Le longitude
      */
+    @Override
     public Double getLongitude()
     {
         return this.longitude;
@@ -206,6 +182,7 @@ public class Arret
      * Setter pour longitude.
      * @param longitude Le longitude à écrire.
      */
+    @Override
     public void setLongitude(final Double longitude)
     {
         this.longitude = longitude;

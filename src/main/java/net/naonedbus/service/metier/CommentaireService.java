@@ -64,7 +64,7 @@ public interface CommentaireService
      * le cas échéant.
      * @param codeLigne Ligne de l'arrêt
      * @param codeSens Sens de l'arrêt
-     * @param codeArret Arrêt dont on veut les horaires
+     * @param codeArret Arrêt
      * @param message à sauvegarder
      * @param cryptedHash Hash des paramètres.
      * @param idClient Clé permettant de vérifier l'intégrité des données transmises
@@ -82,7 +82,7 @@ public interface CommentaireService
      * le cas échéant.
      * @param codeLigne Ligne de l'arrêt
      * @param codeSens Sens de l'arrêt
-     * @param codeArret Arrêt dont on veut les horaires
+     * @param codeArret Arrêt
      * @param message à sauvegarder
      * @param cryptedHash Hash des paramètres.
      * @param idClient Clé permettant de vérifier l'intégrité des données transmises
