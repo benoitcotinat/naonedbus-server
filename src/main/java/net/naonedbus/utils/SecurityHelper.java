@@ -164,7 +164,7 @@ public class SecurityHelper
         Boolean isValid = Boolean.FALSE;
 
         final String concat = StringUtils.join(args);
-        // DÃ©chiffrement et vÃ©rification
+        // Déchiffrement et vérification
         final String signaturePEM = this.signatures.get(idClient.toLowerCase());
         try
         {
@@ -180,10 +180,10 @@ public class SecurityHelper
 
             if (!isValid)
             {
-                this.log.debug("VÃ©rification de la signature incorrecte :\n"
-                               + "\tMessage : "
+                this.log.debug("Vérification de la signature incorrecte :\n"
+                               + "\tMessage : >"
                                + concat
-                               + "\n\tSignature  : "
+                               + "<\n\tSignature  : "
                                + signature.toString()
                                + "\tpour les arguments : "
                                + Arrays.asList(args));
@@ -191,9 +191,9 @@ public class SecurityHelper
         }
         catch (final GeneralSecurityException | Base64DecoderException e)
         {
-            this.log.error("Erreur lors de la gÃ©nÃ©ration de la clÃ© ou du chiffrement du message de "
+            this.log.error("Erreur lors de la génération de la clé ou du chiffrement du message de "
                                    + idClient
-                                   + " avec les paramÃ¨tres "
+                                   + " avec les paramètres "
                                    + Arrays.asList(args),
                            e);
         }
