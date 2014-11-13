@@ -75,15 +75,23 @@
     
     <util:list id="commentaireNaonedbusPublishers" list-class="java.util.ArrayList" value-type="net.naonedbus.service.commentaire.publisher.CommentairePublisher">
     	<ref bean="commentaireBDDPublisher"/>
-    	<ref bean="commentaireTwitterPublisher"/>
+    	<ref bean="commentaireTwitterNblPublisher"/>
+    	<ref bean="commentaireTwitterTanNantesPublisher"/>
     </util:list>
     <util:list id="commentaireNaonedbusServicePublishers" list-class="java.util.ArrayList" value-type="net.naonedbus.service.commentaire.publisher.CommentairePublisher">
     	<ref bean="commentaireBDDPublisher"/>
     </util:list>
     
     <bean id="commentaireBDDPublisher" class="net.naonedbus.service.commentaire.publisher.impl.CommentaireBDDPublisher" />
-    <bean id="commentaireTwitterPublisher" class="net.naonedbus.service.commentaire.publisher.impl.CommentaireTwitterPublisher">
+    <bean id="commentaireTwitterTanNantesPublisher" class="net.naonedbus.service.commentaire.publisher.impl.CommentaireTwitterPublisher">
         <property name="twitterActivated" value="${twitter.activated}" />
+        <property name="twitter" ref="tanNantesTwitter" />
+        <property name="commentaireDecorators" ref="commentaireDecoratorsHashTag" />
+    </bean>
+    <bean id="commentaireTwitterNblPublisher" class="net.naonedbus.service.commentaire.publisher.impl.CommentaireTwitterPublisher">
+        <property name="twitterActivated" value="${twitter.activated}" />
+        <property name="twitter" ref="nblTwitter" />
+        <property name="commentaireDecorators" ref="commentaireDecorators" />
     </bean>
     
     <!-- ################################################## -->

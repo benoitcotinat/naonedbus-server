@@ -43,7 +43,7 @@
     	<constructor-arg value="${twitter.naonedbus.accessToken}" />
     	<constructor-arg value="${twitter.naonedbus.accessToken.secret}" />
     </bean>
-
+    
     <!--  Authentification twitter pour le post de tweet sur le compte @tan_nantes. -->
     <bean id="tanNantesTwitterFactory" class="net.naonedbus.context.NaonedbusTwitterFactory" />
     <bean id="tanNantesTwitter" class="twitter4j.Twitter" factory-bean="tanNantesTwitterFactory" factory-method="getObject">
@@ -51,6 +51,15 @@
     	<constructor-arg value="${twitter.consumer.secret}" />
     	<constructor-arg value="${twitter.tanNantes.accessToken}" />
     	<constructor-arg value="${twitter.tanNantes.accessToken.secret}" />
+    </bean>
+
+    <!--  Authentification twitter pour le post de tweet sur le compte @naonedbuslive. -->
+    <bean id="nblTwitterFactory" class="net.naonedbus.context.NaonedbusTwitterFactory" />
+    <bean id="nblTwitter" class="twitter4j.Twitter" factory-bean="nblTwitterFactory" factory-method="getObject">
+    	<constructor-arg value="${twitter.consumer}" />
+    	<constructor-arg value="${twitter.consumer.secret}" />
+    	<constructor-arg value="${twitter.nbl.accessToken}" />
+    	<constructor-arg value="${twitter.nbl.accessToken.secret}" />
     </bean>
     
 </beans>

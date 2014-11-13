@@ -35,12 +35,19 @@
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
     
-    <util:list id="commentaireDecorators" list-class="java.util.ArrayList" value-type="net.naonedbus.service.commentaire.decorator.CommentaireDecorator">
+    <util:list id="commentaireDecoratorsHashTag" list-class="java.util.ArrayList" value-type="net.naonedbus.service.commentaire.decorator.CommentaireDecorator">
     	<ref bean="commentaireTopoSeparatorDecorator" />
     	<ref bean="commentaireTopoSensDecorator" />
     	<ref bean="commentaireTopoArretDecorator" />
     	<ref bean="commentaireTopoLigneDecorator" />
     	<ref bean="commentaireNaonedbusDecorator" />
+    	<ref bean="commentaireSizeDecorator" />
+    </util:list>
+    <util:list id="commentaireDecorators" list-class="java.util.ArrayList" value-type="net.naonedbus.service.commentaire.decorator.CommentaireDecorator">
+    	<ref bean="commentaireTopoSeparatorDecorator" />
+    	<ref bean="commentaireTopoSensDecorator" />
+    	<ref bean="commentaireTopoArretDecorator" />
+    	<ref bean="commentaireTopoLigneDecorator" />
     	<ref bean="commentaireSizeDecorator" />
     </util:list>
     <bean id="commentaireTopoSeparatorDecorator" class="net.naonedbus.service.commentaire.decorator.impl.CommentaireTopoSeparatorDecorator" />

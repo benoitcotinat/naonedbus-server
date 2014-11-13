@@ -85,13 +85,11 @@ public class CommentaireTwitterPublisher
     /**
      * Gestionnaire de connexion à twitter.
      */
-    @Resource(name = "tanNantesTwitter")
     private Twitter twitter;
 
     /**
      * Liste des décorators du message du commentaire.
      */
-    @Resource(name = "commentaireDecorators")
     private List<CommentaireDecorator> commentaireDecorators;
 
     /**
