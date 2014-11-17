@@ -49,6 +49,7 @@
 		<commons-cli-version>1.2</commons-cli-version>
 		<commons-codec-version>1.5</commons-codec-version><!-- 1.6 -->
 		<commons-collections-version>3.2.1</commons-collections-version>
+		<commons-collections4-version>4.0</commons-collections4-version>
 		<commons-email-version>1.2</commons-email-version>
 		<commons-httpclient-version>3.1</commons-httpclient-version>
 		<commons-lang-version>2.6</commons-lang-version>
@@ -154,6 +155,11 @@
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 			<version>${commons-collections-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>${commons-collections4-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
