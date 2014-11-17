@@ -314,6 +314,45 @@ public class CommentaireWS
     }
 
     /**
+     * Supprime un commentaire.
+     * @param id ID du commentaire à supprimer.
+     * @param signature Signature des paramètres.
+     * @param client Clé permettant de vérifier l'intégrité des données transmises.
+     * @throws NaonedbusException
+     */
+    @POST
+    @Path("delete/v2")
+    public void deleteV2(final @QueryParam("id") int id,
+                         final @QueryParam("signature") String signature,
+                         final @QueryParam("client") String client)
+        throws NaonedbusException
+    {
+        if (this.log.isDebugEnabled())
+        {
+            final StringBuilder sb = new StringBuilder();
+            sb.append(" => Suppression du commentaire ");
+            sb.append(id);
+            sb.append(" de la part du client ");
+            sb.append(client);
+            sb.append(" - Signature = >");
+            sb.append(signature);
+            sb.append("<");
+            this.log.debug(sb.toString());
+        }
+
+        try
+        {
+            this.commentaireService.delete(id,
+                                           signature,
+                                           client);
+        }
+        catch (final NaonedbusException e)
+        {
+            throw new WebApplicationException(Status.FORBIDDEN);
+        }
+    }
+
+    /**
      * Setter pour commentaireService.
      * @param commentaireService Le commentaireService à écrire.
      */
