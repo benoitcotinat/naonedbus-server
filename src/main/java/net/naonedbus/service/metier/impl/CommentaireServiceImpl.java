@@ -58,7 +58,6 @@ import net.naonedbus.exception.NaonedbusException;
 import net.naonedbus.factory.impl.CommentaireFactory;
 import net.naonedbus.model.Commentaire;
 import net.naonedbus.model.criteria.impl.CommentaireSearchCriteria;
-import net.naonedbus.security.NaonedbusClient;
 import net.naonedbus.service.commentaire.destroyer.CommentaireDestroyer;
 import net.naonedbus.service.commentaire.publisher.CommentairePublisher;
 import net.naonedbus.service.commentaire.retriever.CommentaireRetriever;
@@ -186,11 +185,11 @@ public class CommentaireServiceImpl
         throws NaonedbusException
     {
         if (this.securityHelper.validateSignedMessage(idClient,
-                                         signedMessage,
-                                         codeLigne,
-                                         codeSens,
-                                         codeArret,
-                                         message))
+                                                      signedMessage,
+                                                      codeLigne,
+                                                      codeSens,
+                                                      codeArret,
+                                                      message))
         {
             final Commentaire commentaire = this.commentaireFactory.getInitializedObject(codeLigne,
                                                                                          codeSens,
@@ -259,9 +258,9 @@ public class CommentaireServiceImpl
                        final String idClient)
         throws NaonedbusException
     {
-        if (this.securityHelper.validate(NaonedbusClient.NAONEDBUS_SERVICE.name(),
-                                         signedMessage,
-                                         String.valueOf(id)))
+        if (this.securityHelper.validateSignedMessage(idClient,
+                                                      signedMessage,
+                                                      String.valueOf(id)))
         {
             final Commentaire commentaire = this.get(id);
             final List<CommentaireDestroyer> destroyers =
