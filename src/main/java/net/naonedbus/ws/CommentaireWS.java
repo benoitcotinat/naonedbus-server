@@ -321,7 +321,7 @@ public class CommentaireWS
      * @throws NaonedbusException
      */
     @POST
-    @Path("delete/v2")
+    @Path("v2/delete")
     public void deleteV2(final @QueryParam("id") int id,
                          final @QueryParam("signature") String signature,
                          final @QueryParam("client") String client)
