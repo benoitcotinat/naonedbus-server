@@ -45,8 +45,6 @@ package net.naonedbus.service.commentaire.destroyer.impl;
  */
 
 
-import javax.annotation.Resource;
-
 import net.naonedbus.exception.NaonedbusException;
 import net.naonedbus.model.Commentaire;
 import net.naonedbus.service.commentaire.destroyer.CommentaireDestroyer;
@@ -73,7 +71,6 @@ public class CommentaireTwitterDestroyer
     /**
      * Instance de l'accès à Twitter.
      */
-    @Resource(name = "tanNantesTwitter")
     private Twitter twitter;
 
     /**

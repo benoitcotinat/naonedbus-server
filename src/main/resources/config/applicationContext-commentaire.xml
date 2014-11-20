@@ -113,6 +113,8 @@
     </util:list>
     
     <bean id="commentaireBDDDestroyer" class="net.naonedbus.service.commentaire.destroyer.impl.CommentaireBDDDestroyer" />
-    <bean id="commentaireTwitterDestroyer" class="net.naonedbus.service.commentaire.destroyer.impl.CommentaireTwitterDestroyer" />
+    <bean id="commentaireTwitterDestroyer" class="net.naonedbus.service.commentaire.destroyer.impl.CommentaireTwitterDestroyer">
+        <property name="twitter" ref="tanNantesTwitter" />
+    </bean>
     
 </beans>
