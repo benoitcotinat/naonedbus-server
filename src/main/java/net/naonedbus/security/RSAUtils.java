@@ -234,7 +234,7 @@ public class RSAUtils
             NoSuchProviderException,
             Base64DecoderException
     {
-        final byte[] src = Base64.decode(data.getBytes());
+        final byte[] src = org.apache.commons.codec.binary.Base64.decodeBase64(data.getBytes());
         return RSAUtils.decrypt(src,
                                 key);
     }
