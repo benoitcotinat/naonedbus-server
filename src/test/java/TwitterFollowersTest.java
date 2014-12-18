@@ -88,8 +88,6 @@ public class TwitterFollowersTest
         final Collection<Long> subtract = CollectionUtils.subtract(tanNantesFollowersIds,
                                                                    naonedbusLiveFollowersIds);
 
-
-
         /* ******************* */
         this.step2Tweet(twitterTanNantes);
         this.step2AddFollowers(twitterNaonedbusLive,
