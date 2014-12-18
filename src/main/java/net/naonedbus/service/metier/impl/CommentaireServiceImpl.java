@@ -167,7 +167,7 @@ public class CommentaireServiceImpl
         }
         else
         {
-            this.log.error("Soumission d'un commentaire avec une signature non valide pour le client "
+            this.log.error("Soumission d'un commentaire avec une hash non valide pour le client "
                            + idClient);
             throw new NaonedbusException();
         }
