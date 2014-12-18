@@ -49,7 +49,6 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -57,7 +56,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import net.naonedbus.model.common.ICommentaire;
@@ -70,8 +68,8 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author Benoît
  * @version 2.0
  */
-@XmlRootElement
-@Entity(name = "commentaire")
+// @XmlRootElement
+// @Entity(name = "commentaire")
 public class Commentaire
     extends BeanObject
     implements Serializable, ICommentaire
@@ -99,8 +97,8 @@ public class Commentaire
     /**
      * Arrêt concerné.
      */
-    @OneToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "id_arret")
+    // @OneToOne(fetch = FetchType.LAZY, optional = true)
+    // @JoinColumn(name = "id_arret")
     private Arret arret;
 
     /**
