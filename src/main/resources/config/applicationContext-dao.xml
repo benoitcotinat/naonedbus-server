@@ -77,4 +77,20 @@
 		<constructor-arg index="0" value="net.naonedbus.model.Favoris"/>
 	</bean>
     
+    <!-- ============================= -->
+    <!-- ROUTES                   -->
+    <!-- ============================= -->
+    <bean id="routesDao" parent="commonDao">
+        <constructor-arg index="0" value="net.naonedbus.model.Routes"/>
+    </bean>
+    <bean id="directionsDao" parent="commonDao">
+        <constructor-arg index="0" value="net.naonedbus.model.Directions"/>
+    </bean>
+    <bean id="stopsDao" parent="commonDao">
+        <constructor-arg index="0" value="net.naonedbus.model.Stops"/>
+    </bean>
+    <bean id="equipmentsDao" parent="commonDao">
+        <constructor-arg index="0" value="net.naonedbus.model.Equipments"/>
+    </bean>
+    
 </beans>
