@@ -30,15 +30,15 @@ package net.naonedbus.utils.constants;
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
- * published by the Free Software Foundation, either version 3 of the 
+ * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public 
+ *
+ * You should have received a copy of the GNU General Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
@@ -74,6 +74,21 @@ public class NaonedbusConstants
     public static final int COMMENTAIRE_TAILLE = 140;
 
     /**
+     * Taille des arrêts avant troncature.
+     */
+    public static final int ARRET_TAILLE = 15;
+
+    /**
+     * Taille des sens avant troncature.
+     */
+    public static final int SENS_TAILLE = 15;
+
+    /**
+     * Point.
+     */
+    public static final String DOT = ".";
+
+    /**
      * New line character.
      */
     public static final String NEW_LINE = "\n";
@@ -104,12 +119,27 @@ public class NaonedbusConstants
     public static final Character SENS = '\u2192';
 
     /**
+     * Caractère "points de suspension" à pour illustrer la troncature.
+     */
+    public static final Character TRONCATURE = '\u2026';
+
+    /**
      * Séparateur entre la topo et le message d'un tweet.
      */
-    public static final String TOPO_SEPARATOR = "\u2022";
+     public static final String TOPO_SEPARATOR = "\u2022";
 
     /**
      * Préfixe des informations portant sur la ligne.
      */
     public static final String TOPO_LIGNE = "L.";
+
+    /**
+     * Caractère "virgule" à positionner après le sens.
+     */
+    public static final Character COMMA = ',';
+
+    /**
+     * Caractère "espace".
+     */
+    public static final Character SPACE = ' ';
 }
