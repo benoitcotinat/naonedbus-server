@@ -33,7 +33,7 @@ public enum NaonedbusClient
     /**
      * Compte twitter du trafic de la tan.
      */
-    TWITTER_TAN_TRAFIC("infotrafic_tan"),
+    TWITTER_TAN_TRAFIC("reseau_tan"),
 
     /**
      * Compte twitter @TANinfos.

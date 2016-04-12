@@ -59,7 +59,7 @@
     <bean id="commentaireBDDRetriever" class="net.naonedbus.service.commentaire.retriever.impl.CommentaireBDDRetriever" />
     <bean id="commentaireTwitterRetriever" class="net.naonedbus.service.commentaire.retriever.impl.CommentaireTwitterRetriever" />
     <util:list id="twitterAccountsToRetrieve" list-class="java.util.ArrayList" value-type="java.lang.String">
-        <value type="java.lang.String">infotrafic_tan</value>
+        <value type="java.lang.String">reseau_tan</value>
         <value type="java.lang.String">taninfos</value>
     </util:list>
     
@@ -76,18 +76,12 @@
     <util:list id="commentaireNaonedbusPublishers" list-class="java.util.ArrayList" value-type="net.naonedbus.service.commentaire.publisher.CommentairePublisher">
     	<ref bean="commentaireBDDPublisher"/>
     	<ref bean="commentaireTwitterNblPublisher"/>
-<!--     	<ref bean="commentaireTwitterTanNantesPublisher"/> -->
     </util:list>
     <util:list id="commentaireNaonedbusServicePublishers" list-class="java.util.ArrayList" value-type="net.naonedbus.service.commentaire.publisher.CommentairePublisher">
     	<ref bean="commentaireBDDPublisher"/>
     </util:list>
     
     <bean id="commentaireBDDPublisher" class="net.naonedbus.service.commentaire.publisher.impl.CommentaireBDDPublisher" />
-<!--     <bean id="commentaireTwitterTanNantesPublisher" class="net.naonedbus.service.commentaire.publisher.impl.CommentaireTwitterPublisher"> -->
-<!--         <property name="twitterActivated" value="${twitter.activated}" /> -->
-<!--         <property name="twitter" ref="tanNantesTwitter" /> -->
-<!--         <property name="commentaireDecorators" ref="commentaireDecoratorsHashTag" /> -->
-<!--     </bean> -->
     <bean id="commentaireTwitterNblPublisher" class="net.naonedbus.service.commentaire.publisher.impl.CommentaireTwitterPublisher">
         <property name="twitterActivated" value="${twitter.activated}" />
         <property name="twitter" ref="nblTwitter" />
